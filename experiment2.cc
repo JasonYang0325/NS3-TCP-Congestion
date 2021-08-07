@@ -15,43 +15,8 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  *
- * Authors: Aarti Nandagiri <aarti.nandagiri@gmail.com>
- *          Vivek Jain <jain.vivek.anand@gmail.com>
- *          Mohit P. Tahiliani <tahiliani@nitk.edu.in>
+ * Authors: Aarti Nandagiri <535073436@qq.com>
  */
-
-// This program simulates the following topology:
-//
-//           1000 Mbps           10Mbps          1000 Mbps
-//  Sender -------------- R1 -------------- R2 -------------- Receiver
-//              5ms               10ms               5ms
-//
-// The link between R1 and R2 is a bottleneck link with 10 Mbps. All other
-// links are 1000 Mbps.
-//
-// This program runs by default for 100 seconds and creates a new directory
-// called 'bbr-results' in the ns-3 root directory. The program creates one
-// sub-directory called 'pcap' in 'bbr-results' directory (if pcap generation
-// is enabled) and three .dat files.
-//
-// (1) 'pcap' sub-directory contains six PCAP files:
-//     * bbr-0-0.pcap for the interface on Sender
-//     * bbr-1-0.pcap for the interface on Receiver
-//     * bbr-2-0.pcap for the first interface on R1
-//     * bbr-2-1.pcap for the second interface on R1
-//     * bbr-3-0.pcap for the first interface on R2
-//     * bbr-3-1.pcap for the second interface on R2
-// (2) cwnd.dat file contains congestion window trace for the sender node
-// (3) throughput.dat file contains sender side throughput trace
-// (4) queueSize.dat file contains queue length trace from the bottleneck link
-//
-// BBR algorithm enters PROBE_RTT phase in every 10 seconds. The congestion
-// window is fixed to 4 segments in this phase with a goal to achieve a better
-// estimate of minimum RTT (because queue at the bottleneck link tends to drain
-// when the congestion window is reduced to 4 segments).
-//
-// The congestion window and queue occupancy traces output by this program show
-// periodic drops every 10 seconds when BBR algorithm is in PROBE_RTT phase.
 
 #include "ns3/core-module.h"
 #include "ns3/network-module.h"
